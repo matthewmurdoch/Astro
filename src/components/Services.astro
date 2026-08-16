@@ -1,0 +1,173 @@
+---
+import { Icon } from 'astro-icon/components';
+
+const services = [
+	{
+		icon: 'ph:palette',
+		title: 'Brand & identity',
+		copy: 'Naming, visual identity systems, and brand guidelines that hold up across every surface.',
+	},
+	{
+		icon: 'ph:code',
+		title: 'Web design & development',
+		copy: 'Custom, fast, accessible websites built to convert, not just to look good in a portfolio.',
+	},
+	{
+		icon: 'ph:cursor-click',
+		title: 'Product design',
+		copy: 'Interfaces for SaaS and consumer products, from first wireframe through shipped feature.',
+	},
+	{
+		icon: 'ph:shopping-cart-simple',
+		title: 'E-commerce',
+		copy: 'Storefronts on Shopify or headless stacks, tuned against real conversion data.',
+	},
+	{
+		icon: 'ph:stack-simple',
+		title: 'Design systems',
+		copy: 'Component libraries and documentation that keep design and engineering moving in sync.',
+	},
+];
+---
+
+<section class="services" id="services">
+	<div class="container services-grid">
+		<div class="services-intro" data-reveal>
+			<h2 class="services-heading">What we do</h2>
+			<p class="services-copy">
+				A compact team that handles the whole arc, from early positioning to the interface people
+				actually use.
+			</p>
+		</div>
+
+		<div class="services-list" data-reveal-group>
+			{
+				services.map((service) => (
+					<div class="service-row" data-reveal>
+						<span class="service-icon">
+							<Icon name={service.icon} />
+						</span>
+						<span class="service-title">{service.title}</span>
+						<span class="service-copy">{service.copy}</span>
+					</div>
+				))
+			}
+		</div>
+	</div>
+</section>
+
+<style>
+	.services {
+		padding-block: clamp(4rem, 8vw, 7rem);
+		border-block-start: 1px solid var(--border);
+	}
+
+	.services-grid {
+		display: grid;
+		grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.4fr);
+		gap: clamp(2.5rem, 5vw, 5rem);
+	}
+
+	.services-intro {
+		position: sticky;
+		top: 6.5rem;
+		align-self: start;
+	}
+
+	.services-heading {
+		font-size: clamp(1.9rem, 3.2vw, 2.6rem);
+	}
+
+	.services-copy {
+		margin-top: 1rem;
+		max-width: 32ch;
+		color: var(--ink-muted);
+		font-size: 1.05rem;
+		line-height: 1.6;
+	}
+
+	.services-list {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.service-row {
+		display: grid;
+		grid-template-columns: auto minmax(0, 15rem) 1fr;
+		align-items: center;
+		gap: clamp(1.25rem, 3vw, 2.5rem);
+		padding-block: 1.9rem;
+		border-bottom: 1px solid var(--border);
+		transition: padding-inline-start 260ms var(--ease-out);
+	}
+
+	.service-row:hover {
+		padding-inline-start: 0.5rem;
+	}
+
+	.service-row:first-child {
+		padding-block-start: 0;
+	}
+
+	.service-icon {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 46px;
+		height: 46px;
+		border-radius: var(--radius-input);
+		background: var(--accent-soft);
+		color: var(--accent);
+		flex-shrink: 0;
+	}
+
+	.service-icon :global(svg) {
+		width: 22px;
+		height: 22px;
+	}
+
+	.service-title {
+		font-family: var(--font-display);
+		font-weight: 700;
+		font-size: 1.2rem;
+		letter-spacing: -0.01em;
+	}
+
+	.service-copy {
+		color: var(--ink-muted);
+		font-size: 0.98rem;
+		line-height: 1.55;
+		max-width: 44ch;
+	}
+
+	@media (max-width: 900px) {
+		.services-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.services-intro {
+			position: static;
+		}
+
+		.service-row {
+			grid-template-columns: auto 1fr;
+			grid-template-areas:
+				'icon title'
+				'copy copy';
+			row-gap: 0.6rem;
+		}
+
+		.service-icon {
+			grid-area: icon;
+		}
+
+		.service-title {
+			grid-area: title;
+		}
+
+		.service-copy {
+			grid-area: copy;
+			max-width: none;
+		}
+	}
+</style>

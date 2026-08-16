@@ -1,11 +1,29 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import LogoMarquee from '../components/LogoMarquee.astro';
+import Work from '../components/Work.astro';
+import Services from '../components/Services.astro';
+import Process from '../components/Process.astro';
+import Testimonial from '../components/Testimonial.astro';
+import CTA from '../components/CTA.astro';
+import Footer from '../components/Footer.astro';
 ---
 
-<Layout>
-	<Welcome />
+<Layout
+	title="Loam Studio — Web design and development agency"
+	description="Loam is a small studio designing and building websites, products, and brand systems for companies that refuse to look ordinary."
+>
+	<Nav />
+	<main>
+		<Hero />
+		<LogoMarquee />
+		<Work />
+		<Services />
+		<Process />
+		<Testimonial />
+		<CTA />
+	</main>
+	<Footer />
 </Layout>

@@ -1,0 +1,83 @@
+---
+import ClientMark from './ClientMark.astro';
+
+const clients: { name: string; initial: string; shape: 'circle' | 'hex' | 'square' | 'diamond' }[] = [
+	{ name: 'Hearthline', initial: 'H', shape: 'circle' },
+	{ name: 'Northfolk', initial: 'N', shape: 'hex' },
+	{ name: 'Kepler Analytics', initial: 'K', shape: 'square' },
+	{ name: 'Salt & Cedar', initial: 'S', shape: 'diamond' },
+	{ name: 'Foundry Union', initial: 'F', shape: 'circle' },
+	{ name: 'Almanac Press', initial: 'A', shape: 'hex' },
+];
+---
+
+<section class="logo-strip" aria-label="Clients Loam has worked with">
+	<div class="container">
+		<p class="logo-strip-label">Trusted by teams building things worth using</p>
+	</div>
+	<div class="marquee">
+		<div class="marquee-track">
+			{clients.map((client) => <ClientMark {...client} />)}
+			{clients.map((client) => <ClientMark {...client} />)}
+		</div>
+	</div>
+</section>
+
+<style>
+	.logo-strip {
+		padding-block: clamp(2rem, 4vw, 3rem);
+		border-block: 1px solid var(--border);
+	}
+
+	.logo-strip-label {
+		font-size: 0.9rem;
+		color: var(--ink-faint);
+		margin-bottom: 1.5rem;
+	}
+
+	.marquee {
+		overflow: hidden;
+		-webkit-mask-image: linear-gradient(
+			90deg,
+			transparent,
+			black clamp(2rem, 6vw, 6rem),
+			black calc(100% - clamp(2rem, 6vw, 6rem)),
+			transparent
+		);
+		mask-image: linear-gradient(
+			90deg,
+			transparent,
+			black clamp(2rem, 6vw, 6rem),
+			black calc(100% - clamp(2rem, 6vw, 6rem)),
+			transparent
+		);
+	}
+
+	.marquee-track {
+		display: flex;
+		width: max-content;
+		animation: scroll 28s linear infinite;
+	}
+
+	.marquee:hover .marquee-track {
+		animation-play-state: paused;
+	}
+
+	@keyframes scroll {
+		to {
+			transform: translateX(-50%);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.marquee {
+			overflow-x: auto;
+			mask-image: none;
+			-webkit-mask-image: none;
+		}
+
+		.marquee-track {
+			animation: none;
+		}
+	}
+</style>

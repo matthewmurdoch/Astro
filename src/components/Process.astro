@@ -1,0 +1,129 @@
+---
+const steps = [
+	{
+		number: '01',
+		title: 'Discover',
+		copy: 'Workshops and audits to find the real problem before we open a design file.',
+	},
+	{
+		number: '02',
+		title: 'Design',
+		copy: 'Concepting and iteration, tested with real users until the direction is unmistakably right.',
+	},
+	{
+		number: '03',
+		title: 'Build',
+		copy: 'Production-grade, accessible code, built by the same team that designed it.',
+	},
+	{
+		number: '04',
+		title: 'Launch',
+		copy: 'Ship, measure, and keep refining based on what people actually do on the site.',
+	},
+];
+---
+
+<section class="process" id="process">
+	<div class="container">
+		<h2 class="process-heading" data-reveal>How a project runs</h2>
+
+		<div class="process-row" data-reveal-group>
+			{
+				steps.map((step) => (
+					<div class="process-step" data-reveal>
+						<span class="process-number">{step.number}</span>
+						<h3 class="process-title">{step.title}</h3>
+						<p class="process-copy">{step.copy}</p>
+					</div>
+				))
+			}
+		</div>
+	</div>
+</section>
+
+<style>
+	.process {
+		padding-block: clamp(4rem, 8vw, 7rem);
+		border-block-start: 1px solid var(--border);
+	}
+
+	.process-heading {
+		font-size: clamp(1.9rem, 3.2vw, 2.6rem);
+		margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
+		max-width: 20ch;
+	}
+
+	.process-row {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: clamp(1.5rem, 3vw, 2rem);
+		position: relative;
+	}
+
+	.process-row::before {
+		content: '';
+		position: absolute;
+		top: 1.6rem;
+		left: 0;
+		right: 0;
+		height: 1px;
+		background: var(--border);
+	}
+
+	.process-step {
+		position: relative;
+		padding-top: 3.75rem;
+	}
+
+	.process-number {
+		position: absolute;
+		top: 0;
+		left: 0;
+		font-family: var(--font-mono);
+		font-size: 0.95rem;
+		font-weight: 500;
+		color: var(--accent);
+		background: var(--bg);
+		padding-right: 0.75rem;
+	}
+
+	.process-title {
+		font-size: 1.3rem;
+		margin-bottom: 0.6rem;
+	}
+
+	.process-copy {
+		color: var(--ink-muted);
+		font-size: 0.98rem;
+		line-height: 1.6;
+		max-width: 30ch;
+	}
+
+	@media (max-width: 860px) {
+		.process-row {
+			grid-template-columns: 1fr;
+			gap: 2.25rem;
+		}
+
+		.process-row::before {
+			top: 0;
+			bottom: 0;
+			left: 1.6rem;
+			right: auto;
+			width: 1px;
+			height: auto;
+		}
+
+		.process-step {
+			padding-top: 0;
+			padding-left: 3.75rem;
+		}
+
+		.process-number {
+			top: -0.1rem;
+			left: 0;
+			padding-right: 0;
+			padding-bottom: 0.4rem;
+		}
+	}
+</style>

@@ -1,0 +1,205 @@
+---
+import Mark from './Mark.astro';
+import { Icon } from 'astro-icon/components';
+
+const links = [
+	{ label: 'Work', href: '#work' },
+	{ label: 'Services', href: '#services' },
+	{ label: 'Process', href: '#process' },
+	{ label: 'Studio', href: '#testimonial' },
+];
+---
+
+<div data-nav-sentinel></div>
+<header data-nav class="nav">
+	<div class="nav-inner container">
+		<a href="#top" class="nav-brand">
+			<Mark class="nav-mark" />
+			<span>Loam</span>
+		</a>
+
+		<nav class="nav-links" aria-label="Primary">
+			{links.map((link) => <a href={link.href}>{link.label}</a>)}
+		</nav>
+
+		<div class="nav-actions">
+			<a href="#contact" class="btn btn-primary nav-cta">Start a project</a>
+			<button
+				type="button"
+				class="menu-toggle"
+				data-menu-toggle
+				aria-expanded="false"
+				aria-controls="mobile-menu"
+				aria-label="Toggle menu"
+			>
+				<Icon name="ph:list" class="icon-open" />
+				<Icon name="ph:x" class="icon-close" />
+			</button>
+		</div>
+	</div>
+
+	<div class="menu-panel" id="mobile-menu" data-menu-panel>
+		<nav class="menu-panel-links" aria-label="Mobile">
+			{links.map((link) => <a href={link.href}>{link.label}</a>)}
+			<a href="#contact" class="btn btn-primary menu-panel-cta">Start a project</a>
+		</nav>
+	</div>
+</header>
+
+<style>
+	.nav {
+		position: sticky;
+		top: 0;
+		z-index: var(--z-nav);
+		background: oklch(15% 0.012 264 / 0.6);
+		backdrop-filter: blur(16px) saturate(140%);
+		-webkit-backdrop-filter: blur(16px) saturate(140%);
+		border-bottom: 1px solid transparent;
+		transition: border-color 300ms var(--ease-out), background-color 300ms var(--ease-out);
+	}
+
+	.nav.is-scrolled {
+		border-bottom-color: var(--border);
+		background: oklch(15% 0.012 264 / 0.86);
+	}
+
+	.nav-inner {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1.5rem;
+		height: 68px;
+	}
+
+	.nav-brand {
+		display: flex;
+		align-items: center;
+		gap: 0.6rem;
+		font-family: var(--font-display);
+		font-weight: 700;
+		font-size: 1.15rem;
+		letter-spacing: -0.02em;
+		text-decoration: none;
+		color: var(--ink);
+		flex-shrink: 0;
+	}
+
+	.nav-mark {
+		color: var(--accent);
+	}
+
+	.nav-links {
+		display: flex;
+		align-items: center;
+		gap: 2.1rem;
+	}
+
+	.nav-links a {
+		font-size: 0.95rem;
+		font-weight: 500;
+		text-decoration: none;
+		color: var(--ink-muted);
+		transition: color 180ms var(--ease-out);
+		white-space: nowrap;
+	}
+
+	.nav-links a:hover {
+		color: var(--ink);
+	}
+
+	.nav-actions {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		flex-shrink: 0;
+	}
+
+	.nav-cta {
+		padding: 0.7rem 1.35rem;
+		font-size: 0.9rem;
+	}
+
+	.menu-toggle {
+		display: none;
+		align-items: center;
+		justify-content: center;
+		width: 40px;
+		height: 40px;
+		border-radius: var(--radius-input);
+		border: 1px solid var(--border);
+		background: transparent;
+		color: var(--ink);
+		cursor: pointer;
+	}
+
+	.menu-toggle :global(svg) {
+		width: 20px;
+		height: 20px;
+	}
+
+	.menu-toggle :global(.icon-close) {
+		display: none;
+	}
+
+	.nav.is-open .menu-toggle :global(.icon-open) {
+		display: none;
+	}
+
+	.nav.is-open .menu-toggle :global(.icon-close) {
+		display: block;
+	}
+
+	.menu-panel {
+		display: none;
+	}
+
+	@media (max-width: 860px) {
+		.nav-links {
+			display: none;
+		}
+
+		.nav-cta {
+			display: none;
+		}
+
+		.menu-toggle {
+			display: inline-flex;
+		}
+
+		.menu-panel {
+			display: block;
+			max-height: 0;
+			overflow: hidden;
+			border-top: 1px solid transparent;
+			transition:
+				max-height 320ms var(--ease-in-out),
+				border-color 320ms var(--ease-in-out);
+		}
+
+		.nav.is-open .menu-panel {
+			max-height: 320px;
+			border-top-color: var(--border);
+		}
+
+		.menu-panel-links {
+			display: flex;
+			flex-direction: column;
+			gap: 0.25rem;
+			padding: 1.25rem var(--edge-padding) 1.75rem;
+		}
+
+		.menu-panel-links a:not(.btn) {
+			padding: 0.75rem 0;
+			font-size: 1.05rem;
+			font-weight: 500;
+			text-decoration: none;
+			color: var(--ink-muted);
+			border-bottom: 1px solid var(--border);
+		}
+
+		.menu-panel-cta {
+			margin-top: 1rem;
+			justify-content: center;
+		}
+	}
+</style>

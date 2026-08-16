@@ -1,0 +1,192 @@
+---
+import Mark from './Mark.astro';
+import { Icon } from 'astro-icon/components';
+
+const currentYear = new Date().getFullYear();
+
+const columns = [
+	{
+		heading: 'Studio',
+		links: [
+			{ label: 'Work', href: '#work' },
+			{ label: 'Services', href: '#services' },
+			{ label: 'Process', href: '#process' },
+		],
+	},
+	{
+		heading: 'Contact',
+		links: [
+			{ label: 'hello@loamstudio.co', href: 'mailto:hello@loamstudio.co' },
+			{ label: 'Start a project', href: '#contact' },
+		],
+	},
+];
+
+const social = [
+	{ label: 'Instagram', icon: 'ph:instagram-logo', href: 'https://instagram.com' },
+	{ label: 'LinkedIn', icon: 'ph:linkedin-logo', href: 'https://linkedin.com' },
+	{ label: 'X', icon: 'ph:x-logo', href: 'https://x.com' },
+];
+---
+
+<footer class="footer">
+	<div class="container footer-grid">
+		<div class="footer-brand">
+			<a href="#top" class="footer-mark">
+				<Mark class="footer-mark-icon" />
+				<span>Loam</span>
+			</a>
+			<p class="footer-tagline">A small studio designing and building for ambitious brands.</p>
+			<p class="footer-location">Made in Portland, Oregon.</p>
+		</div>
+
+		{
+			columns.map((column) => (
+				<div class="footer-column">
+					<span class="footer-column-heading">{column.heading}</span>
+					<ul class="footer-column-links">
+						{column.links.map((link) => (
+							<li>
+								<a href={link.href}>{link.label}</a>
+							</li>
+						))}
+					</ul>
+				</div>
+			))
+		}
+
+		<div class="footer-social">
+			<span class="footer-column-heading">Follow</span>
+			<div class="footer-social-icons">
+				{
+					social.map((item) => (
+						<a href={item.href} aria-label={item.label} target="_blank" rel="noreferrer noopener">
+							<Icon name={item.icon} />
+						</a>
+					))
+				}
+			</div>
+		</div>
+	</div>
+
+	<div class="container footer-bottom">
+		<span>&copy; {currentYear} Loam Studio. All rights reserved.</span>
+	</div>
+</footer>
+
+<style>
+	.footer {
+		border-block-start: 1px solid var(--border);
+		padding-block-start: clamp(3rem, 6vw, 4.5rem);
+	}
+
+	.footer-grid {
+		display: grid;
+		grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 0.9fr);
+		gap: 2.5rem;
+		padding-bottom: clamp(2.5rem, 5vw, 3.5rem);
+	}
+
+	.footer-mark {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.55rem;
+		font-family: var(--font-display);
+		font-weight: 700;
+		font-size: 1.15rem;
+		text-decoration: none;
+		color: var(--ink);
+	}
+
+	.footer-mark-icon {
+		color: var(--accent);
+	}
+
+	.footer-tagline {
+		margin-top: 1rem;
+		max-width: 26ch;
+		color: var(--ink-muted);
+		font-size: 0.95rem;
+		line-height: 1.55;
+	}
+
+	.footer-location {
+		margin-top: 0.75rem;
+		color: var(--ink-faint);
+		font-size: 0.88rem;
+	}
+
+	.footer-column-heading {
+		display: block;
+		font-size: 0.85rem;
+		font-weight: 600;
+		color: var(--ink-faint);
+		margin-bottom: 1.1rem;
+	}
+
+	.footer-column-links {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+	}
+
+	.footer-column-links a {
+		font-size: 0.95rem;
+		text-decoration: none;
+		color: var(--ink-muted);
+		transition: color 180ms var(--ease-out);
+	}
+
+	.footer-column-links a:hover {
+		color: var(--ink);
+	}
+
+	.footer-social-icons {
+		display: flex;
+		gap: 0.75rem;
+	}
+
+	.footer-social-icons a {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 38px;
+		height: 38px;
+		border-radius: var(--radius-input);
+		border: 1px solid var(--border);
+		color: var(--ink-muted);
+		transition:
+			color 180ms var(--ease-out),
+			border-color 180ms var(--ease-out);
+	}
+
+	.footer-social-icons a:hover {
+		color: var(--ink);
+		border-color: var(--ink-faint);
+	}
+
+	.footer-social-icons :global(svg) {
+		width: 18px;
+		height: 18px;
+	}
+
+	.footer-bottom {
+		border-block-start: 1px solid var(--border);
+		padding-block: 1.5rem;
+		font-size: 0.85rem;
+		color: var(--ink-faint);
+	}
+
+	@media (max-width: 760px) {
+		.footer-grid {
+			grid-template-columns: 1fr 1fr;
+		}
+
+		.footer-brand {
+			grid-column: 1 / -1;
+		}
+	}
+</style>
