@@ -58,6 +58,31 @@ if (canHoverPrecise && !reduceMotion) {
 	});
 }
 
+const servicesPin = document.querySelector('[data-services-triggers]');
+if (servicesPin && 'IntersectionObserver' in window && window.matchMedia('(min-width: 900px)').matches) {
+	const triggers = servicesPin.querySelectorAll('[data-service-trigger]');
+	const rows = document.querySelectorAll('[data-service-row]');
+	const dots = document.querySelectorAll('[data-rail-dot]');
+
+	const setActive = (index) => {
+		rows.forEach((row) => row.classList.toggle('is-active', row.dataset.serviceRow === String(index)));
+		dots.forEach((dot) => dot.classList.toggle('is-active', dot.dataset.railDot === String(index)));
+	};
+
+	const pinObserver = new IntersectionObserver(
+		(entries) => {
+			for (const entry of entries) {
+				if (entry.isIntersecting) {
+					setActive(entry.target.dataset.serviceTrigger);
+				}
+			}
+		},
+		{ rootMargin: '-50% 0px -50% 0px', threshold: 0 },
+	);
+
+	triggers.forEach((trigger) => pinObserver.observe(trigger));
+}
+
 const nav = document.querySelector('[data-nav]');
 if (nav) {
 	const sentinel = document.querySelector('[data-nav-sentinel]');
